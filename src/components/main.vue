@@ -1,8 +1,9 @@
 <template>
     <div class="uploadForm">
         <div class="btn-group btn-group-justified" role="group">
-            <router-link to="/upload" tag="button">Upload</router-link>
-            <router-link to="/list" tag="button">List</router-link>
+            <router-link v-for="m in menu" :to="{path : m.slug}" tag="button">{{m.name}}</router-link>
+            <!--<router-link to="/upload" tag="button">Upload</router-link>-->
+            <!--<router-link to="/list" tag="button">List</router-link>-->
         </div>
     </div>
 </template>
@@ -10,6 +11,20 @@
     export default{
         data(){
             return { }
+        },
+        computed: {
+            menu(){
+                return this.$store.getters.getMenu;
+            }
+        },
+        created(){
+            this.$http.get('menu').then(response => {
+//                this.users = response.body;
+                this.$store.dispatch('setMenu', response.body);
+            }, response => {
+                // error callback
+                console.log('error : ' + response);
+            });
         }
     }
 </script>

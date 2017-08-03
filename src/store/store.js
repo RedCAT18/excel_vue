@@ -6,15 +6,22 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state : {
-        users : {}
+        users : {},
+        menu : {
+            name : '',
+            slug: ''
+        }
     },
     getters : {
-        getUsers : state => { return state.users; }
+        getUsers : state => { return state.users; },
+        getMenu : state => { return state.menu; }
     },
     mutations : {
-        setUsers(state, value){ state.users = value; }
+        setUsers(state, value){ state.users = value; },
+        setMenu(state, value) { state.menu = value; }
     },
     actions : {
-        setUsers({commit}, value) { commit('setUsers', value) }
+        setUsers({commit}, value) { commit('setUsers', value); },
+        setMenu({commit}, value) { commit('setMenu', value); }
     }
 })
